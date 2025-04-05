@@ -1,4 +1,4 @@
-// آدرس قرارداد و ABI// آدرس قرارداد و ABI
+// آدرس قرارداد و ABI
 const contractAddress = "0xe2ba182898141f19b4a7d739c715cd162d31766c";
 const contractABI = [
     {
@@ -50,6 +50,11 @@ async function connectWallet() {
         // آپدیت پروفایل (فرضی)
         const profileCircle = document.querySelector('.profile-circle');
         profileCircle.style.backgroundImage = "url('https://i.imgur.com/example-profile.jpg')"; // تصویر واقعی بذار
+
+        // آپدیت تعداد موجود موقع اتصال
+        const minted = await contract.minted();
+        const totalSupply = await contract.totalSupply();
+        document.getElementById('available').innerText = `${totalSupply.sub(minted).toString()} / ${totalSupply.toString()}`;
     } catch (error) {
         status.innerText = "Error connecting to wallet: " + error.message;
     }
@@ -119,23 +124,6 @@ function createStar() {
         star.remove();
     }, duration * 1000);
 }
-
-// استایل ستاره‌ها (چون CSS جدا نفرستادی)
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-    .star {
-        position: absolute;
-        background: #fff;
-        border-radius: 50%;
-        animation: twinkle linear infinite;
-    }
-    @keyframes twinkle {
-        0% { opacity: 0; }
-        50% { opacity: 1; }
-        100% { opacity: 0; }
-    }
-`;
-document.head.appendChild(styleSheet);
 
 // هر 500 میلی‌ثانیه یه ستاره جدید
 setInterval(createStar, 500);
