@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: #1a1a2e; /* پس‌زمینه تیره برای هماهنگی با بنفش */
+    background: #1a1a2e; /* پس‌زمینه تیره */
     color: #ffffff;
     text-align: center;
     position: relative;
@@ -14,7 +14,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://i.imgur.com/stars-bg.jpg') repeat; /* تصویر فرضی، می‌تونی عوض کنی */
+    background: url('https://i.imgur.com/stars-bg.jpg') repeat; /* تصویر فرضی */
     opacity: 0.2;
     z-index: -1;
 }
@@ -50,7 +50,7 @@ body {
 .profile-circle {
     width: 40px;
     height: 40px;
-    background: #8a63d2; /* بنفش فارکستر */
+    background: #8a63d2;
     border-radius: 50%;
 }
 
@@ -66,10 +66,10 @@ h1 {
 }
 
 .nft-description {
-    font-family: 'Roboto Slab', serif; /* فونت نازک و جذاب */
+    font-family: 'Roboto Slab', serif;
     font-weight: 300;
-    font-size: 14px; /* نازک‌تر */
-    color: #d3ccff; /* تناژ بنفش روشن برای متن */
+    font-size: 14px;
+    color: #d3ccff;
     margin: 10px 0;
 }
 
@@ -80,15 +80,18 @@ h1 {
 }
 
 .mint-button {
-    padding: 15px 40px; /* بزرگ‌تر کردن دکمه */
+    padding: 10px 60px; /* نازک‌تر و درازتر */
     background: #8a63d2; /* بنفش فارکستر */
     border: none;
     color: #ffffff;
-    font-size: 18px; /* فونت کمی بزرگ‌تر */
-    border-radius: 8px;
+    font-size: 18px;
+    border-radius: 4px; /* مستطیلی‌تر */
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .mint-button:disabled {
@@ -97,11 +100,45 @@ h1 {
 }
 
 .mint-button:hover:not(:disabled) {
-    background: #a78bfa; /* روشن‌تر برای هاور */
+    transform: scale(1.05); /* یه زوم کوچیک */
+    background: #a78bfa;
+}
+
+.mint-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { width: 0; height: 0; opacity: 1; }
+    100% { width: 200px; height: 200px; opacity: 0; }
+}
+
+/* انیمیشن ستاره‌ها */
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle linear infinite;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 #status {
     margin-top: 10px;
     font-size: 14px;
-    color: #d3ccff; /* تناژ بنفش روشن */
+    color: #d3ccff;
 }
