@@ -29,17 +29,26 @@ let provider;
 let signer;
 let contract;
 
-// تابع برای اتصال به والت
+// تابع برای اتصال به والت (پشتیبانی از MetaMask و Warplet)
 async function connectWallet() {
     const status = document.getElementById('status');
     try {
-        if (typeof window.ethereum === 'undefined') {
-            status.innerText = "Please install MetaMask or another wallet!";
+        // چک کردن والت‌های موجود
+        let walletProvider = null;
+        if (window.ethereum) {
+            // MetaMask یا هر والت سازگار با Ethereum
+            walletProvider = window.ethereum;
+            status.innerText = "Connecting to MetaMask...";
+        } else if (window.warplet) {
+            // Warplet (فرضاً اینجوری تشخیص داده می‌شه)
+            walletProvider = window.warplet;
+            status.innerText = "Connecting to Warplet...";
+        } else {
+            status.innerText = "No wallet detected! Install MetaMask or Warplet.";
             return;
         }
 
-        status.innerText = "Connecting to wallet...";
-        provider = new ethers.providers.Web3Provider(window.ethereum);
+        provider = new ethers.providers.Web3Provider(walletProvider);
         await provider.send("eth_requestAccounts", []);
         signer = provider.getSigner();
 
@@ -51,7 +60,7 @@ async function connectWallet() {
         const profileCircle = document.querySelector('.profile-circle');
         profileCircle.style.backgroundImage = "url('https://i.imgur.com/example-profile.jpg')"; // تصویر واقعی بذار
 
-        // آپدیت تعداد موجود موقع اتصال
+        // آپدیت تعداد موجود
         const minted = await contract.minted();
         const totalSupply = await contract.totalSupply();
         document.getElementById('available').innerText = `${totalSupply.sub(minted).toString()} / ${totalSupply.toString()}`;
