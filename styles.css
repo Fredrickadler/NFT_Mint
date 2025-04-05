@@ -27,7 +27,7 @@ body {
 
 .profile-section {
     position: absolute;
-    top: -50px; /* بالاتر از کانتینر */
+    top: -50px;
     right: 15px;
     display: flex;
     align-items: center;
