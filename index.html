@@ -3,42 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFT Mint Mini App</title>
+    <title>Cosmic Fragment NFT</title>
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Cosmic Fragment NFT">
     <meta property="og:description" content="A unique piece of digital art, crafted with cosmic energy and rare stardust. Own a fragment of the universe!">
     <meta property="og:image" content="https://i.imgur.com/5lAUjyc.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://your-app-name.vercel.app">
+    <meta property="og:url" content="https://nft-mint-topaz.vercel.app">
     <meta property="og:type" content="website">
+    <!-- Farcaster Frame Tags -->
     <meta property="fc:frame" content="vNext">
     <meta property="fc:frame:image" content="https://i.imgur.com/5lAUjyc.webp">
     <meta property="fc:frame:image:aspect_ratio" content="1.91:1">
-    <meta property="fc:frame:post_url" content="https://your-app-name.vercel.app/mint">
+    <meta property="fc:frame:post_url" content="https://nft-mint-topaz.vercel.app/mint">
     <meta property="fc:frame:button:1" content="Mint Now">
     <meta property="fc:frame:button:1:action" content="post">
-    <meta property="fc:frame:button:1:target" content="https://your-app-name.vercel.app/mint">
-    <!-- End Open Graph Tags -->
-    <link rel="stylesheet" href="styles.css">
+    <meta property="fc:frame:button:1:target" content="https://nft-mint-topaz.vercel.app/mint">
+    <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Poppins', sans-serif; 
+            background: #1a1a2e; 
+            color: #ffffff; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .stars-background { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: url('https://i.imgur.com/stars-bg.jpg') repeat; 
+            opacity: 0.2; 
+            z-index: -1; 
+        }
+        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        .profile-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .wallet-button { 
+            padding: 8px 16px; 
+            background: #16213e; 
+            border: 1px solid #e94560; 
+            color: #fff; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .profile-circle { width: 40px; height: 40px; background: #e94560; border-radius: 50%; }
+        .nft-image { max-width: 100%; border-radius: 10px; }
+        h1 { font-size: 28px; margin: 10px 0; }
+        .nft-description { font-size: 16px; color: #cccccc; }
+        .nft-availability { font-size: 14px; margin: 10px 0; }
+        .mint-button { 
+            padding: 12px 24px; 
+            background: #e94560; 
+            border: none; 
+            color: #fff; 
+            font-size: 16px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .mint-button:disabled { background: #555; cursor: not-allowed; }
+        #status { margin-top: 10px; font-size: 14px; }
+    </style>
     <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js" type="text/javascript"></script>
 </head>
 <body>
     <div class="stars-background"></div>
     <div class="container">
         <div class="profile-section">
-            <button class="wallet-button" onclick="connectWallet()">Wallet</button>
+            <button class="wallet-button" onclick="connectWallet()">Connect Wallet</button>
             <div class="profile-circle"></div>
         </div>
         <div class="header">
             <img src="https://i.imgur.com/5lAUjyc.webp" alt="NFT Image" class="nft-image">
             <h1>Cosmic Fragment</h1>
             <p class="nft-description">A unique piece of digital art, crafted with cosmic energy and rare stardust. Own a fragment of the universe!</p>
-            <p class="nft-availability">Available: 44 / 44</p>
+            <p class="nft-availability">Available: <span id="available">44 / 44</span></p>
         </div>
-        <button class="mint-button mint-action" id="mintButton" onclick="mintNFT()" disabled>Mint Now</button>
-        <p id="status" style="color: #cccccc; margin-top: 10px;"></p>
+        <button class="mint-button" id="mintButton" onclick="mintNFT()" disabled>Mint Now</button>
+        <p id="status"></p>
     </div>
     <script src="script.js"></script>
 </body>
