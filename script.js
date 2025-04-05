@@ -1,4 +1,3 @@
-// آدرس قرارداد و ABI
 const contractAddress = "0xe2ba182898141f19b4a7d739c715cd162d31766c";
 const contractABI = [
     {
@@ -24,21 +23,19 @@ const contractABI = [
     }
 ];
 
-// متغیرها برای ethers و SDK
 let provider;
 let signer;
 let contract;
-const { MiniAppSDK } = window.FarcasterMiniApps; // SDK رو از window می‌گیرم
+const { MiniAppSDK } = window.FarcasterMiniApps;
 const sdk = new MiniAppSDK();
 
-// تابع برای اتصال به والت
 async function connectWallet() {
     const status = document.getElementById('status');
     try {
         let walletProvider = null;
-        if (MiniAppSDK.ethProvider) {
-            // استفاده از ethProvider از SDK اگه توی Farcaster اجرا بشه
-            walletProvider = MiniAppSDK.ethProvider;
+        if (sdk.wallet && sdk.wallet.ethProvider) {
+            // استفاده از EIP-1193 Provider از SDK
+            walletProvider = sdk.wallet.ethProvider;
             status.innerText = "Connecting via Farcaster wallet...";
         } else if (window.ethereum) {
             // MetaMask
@@ -72,7 +69,6 @@ async function connectWallet() {
     }
 }
 
-// تابع برای مینت کردن NFT
 async function mintNFT() {
     const status = document.getElementById('status');
     const availableSpan = document.getElementById('available');
@@ -96,7 +92,6 @@ async function mintNFT() {
     }
 }
 
-// تابع برای هندل کردن درخواست‌های Warpcast Frames
 function handleWarpcastRequest() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('warpcast') || window.location.pathname === '/mint') {
@@ -109,7 +104,6 @@ function handleWarpcastRequest() {
     }
 }
 
-// تابع برای ایجاد ستاره‌ها
 function createStar() {
     const star = document.createElement('div');
     star.classList.add('star');
@@ -138,9 +132,7 @@ function createStar() {
 
 setInterval(createStar, 500);
 
-// موقع لود صفحه
 window.onload = async function() {
     handleWarpcastRequest();
-    // مخفی کردن Splash Screen بعد از لود
     await sdk.ready();
 };
