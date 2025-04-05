@@ -1,4 +1,4 @@
-// آدرس قرارداد و ABI// آدرس قرارداد و ABI
+// آدرس قرارداد و ABI
 const contractAddress = "0xe2ba182898141f19b4a7d739c715cd162d31766c";
 const contractABI = [
     {
@@ -71,7 +71,10 @@ function createStar() {
     const duration = Math.random() * 2 + 2;
     star.style.animationDuration = `${duration}s`;
     
-    document.querySelector('.stars-background').appendChild(star);
+    const starsBackground = document.querySelector('.stars-background');
+    if (starsBackground) {
+        starsBackground.appendChild(star);
+    }
     
     setTimeout(() => {
         star.remove();
