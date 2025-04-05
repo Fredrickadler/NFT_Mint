@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: #1a1a2e; /* پس‌زمینه تیره */
+    background: #1a1a2e;
     color: #ffffff;
     text-align: center;
     position: relative;
@@ -14,7 +14,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://i.imgur.com/stars-bg.jpg') repeat; /* تصویر فرضی */
+    background: url('https://i.imgur.com/stars-bg.jpg') repeat;
     opacity: 0.2;
     z-index: -1;
 }
@@ -34,7 +34,7 @@ body {
 
 .wallet-button {
     padding: 8px 16px;
-    background: #8a63d2; /* بنفش فارکستر */
+    background: #8a63d2;
     border: 1px solid #ffffff;
     color: #ffffff;
     border-radius: 5px;
@@ -44,7 +44,7 @@ body {
 }
 
 .wallet-button:hover {
-    background: #a78bfa; /* روشن‌تر برای هاور */
+    background: #a78bfa;
 }
 
 .profile-circle {
@@ -80,18 +80,18 @@ h1 {
 }
 
 .mint-button {
-    padding: 10px 60px; /* نازک‌تر و درازتر */
+    padding: 10px 60px;
     background: #8a63d2; /* بنفش فارکستر */
     border: none;
     color: #ffffff;
     font-size: 18px;
-    border-radius: 4px; /* مستطیلی‌تر */
+    border-radius: 4px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .mint-button:disabled {
@@ -100,26 +100,25 @@ h1 {
 }
 
 .mint-button:hover:not(:disabled) {
-    transform: scale(1.05); /* یه زوم کوچیک */
     background: #a78bfa;
+    box-shadow: 0 0 15px #8a63d2; /* درخشش بنفش */
 }
 
 .mint-button::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: pulse 2s infinite;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shine 2s infinite;
 }
 
-@keyframes pulse {
-    0% { width: 0; height: 0; opacity: 1; }
-    100% { width: 200px; height: 200px; opacity: 0; }
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
 }
 
 /* انیمیشن ستاره‌ها */
