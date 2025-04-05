@@ -21,8 +21,10 @@ body {
 
 .container {
     padding: 20px;
-    max-width: 600px;
+    max-width: 424px; /* عرض وب */
+    height: 695px; /* ارتفاع وب */
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .profile-section {
@@ -81,7 +83,7 @@ h1 {
 
 .mint-button {
     padding: 10px 60px;
-    background: #8a63d2; /* بنفش فارکستر */
+    background: #8a63d2;
     border: none;
     color: #ffffff;
     font-size: 18px;
@@ -95,7 +97,7 @@ h1 {
 }
 
 .mint-button:disabled {
-    background: #6b4ba8; /* بنفش تیره‌تر که قبلاً گذاشتم */
+    background: #6b4ba8;
     cursor: not-allowed;
 }
 
@@ -121,7 +123,6 @@ h1 {
     100% { left: 100%; }
 }
 
-/* انیمیشن ستاره‌ها */
 .star {
     position: absolute;
     background: #fff;
