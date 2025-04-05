@@ -135,13 +135,12 @@ setInterval(createStar, 500);
 window.onload = async function() {
     document.getElementById('status').innerText = "Loading Mini App...";
     try {
-        if (sdk && sdk.ready) {
-            await Promise.race([
-                sdk.ready(),
-                new Promise(resolve => setTimeout(resolve, 5000))
-            ]);
+        if (sdk && sdk.actions && sdk.actions.ready) {
+            // Splash Screen رو با sdk.actions.ready مخفی می‌کنیم
+            await sdk.actions.ready({ disableNativeGestures: true });
             document.getElementById('status').innerText = "Mini App loaded with SDK!";
         } else {
+            // اگه SDK نبود، فقط ادامه می‌دیم
             document.getElementById('status').innerText = "Mini App loaded (No SDK detected)";
         }
     } catch (error) {
