@@ -95,13 +95,13 @@ h1 {
 }
 
 .mint-button:disabled {
-    background: #555;
+    background: #6b4ba8; /* بنفش تیره‌تر برای حالت غیرفعال */
     cursor: not-allowed;
 }
 
 .mint-button:hover:not(:disabled) {
     background: #a78bfa;
-    box-shadow: 0 0 15px #8a63d2; /* درخشش بنفش */
+    box-shadow: 0 0 15px #8a63d2;
 }
 
 .mint-button::before {
