@@ -1,13 +1,12 @@
 export default function handler(req, res) {
     if (req.method === 'POST') {
-        // پاسخ فریم به Warpcast
         res.status(200).json({
             "fc:frame": {
                 "version": "vNext",
-                "image": "https://i.imgur.com/5lAUjyc.webp", // تصویر بعد از کلیک
+                "image": "https://i.imgur.com/5lAUjyc.webp",
                 "buttons": [
                     {
-                        "label": "Mint Now",
+                        "label": "Connect Wallet & Mint",
                         "action": "post",
                         "target": "https://nft-mint-topaz.vercel.app/api/mint"
                     },
