@@ -6,19 +6,14 @@ export default function handler(req, res) {
                 "image": "https://i.imgur.com/5lAUjyc.webp",
                 "buttons": [
                     {
-                        "label": "Connect Wallet & Mint",
-                        "action": "post",
-                        "target": "https://nft-mint-topaz.vercel.app/api/mint"
-                    },
-                    {
-                        "label": "Back",
+                        "label": "Mint Successful",
                         "action": "post",
                         "target": "https://nft-mint-topaz.vercel.app/"
                     }
                 ],
-                "post_url": "https://nft-mint-topaz.vercel.app/api/mint"
+                "post_url": "https://nft-mint-topaz.vercel.app/"
             },
-            "message": "Please connect your wallet to mint!"
+            "message": "Mint request processed!"
         });
     } else {
         res.status(405).json({ message: "Method not allowed" });
