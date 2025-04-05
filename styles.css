@@ -15,11 +15,11 @@ body {
 .container {
     text-align: center;
     background-color: #2a2a2a;
-    padding: 30px; /* کمی بزرگ‌تر */
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 90%;
-    max-width: 450px; /* بزرگ‌تر */
+    max-width: 450px;
     position: relative;
     z-index: 1;
     animation: slideIn 1s ease-out;
@@ -27,7 +27,7 @@ body {
 
 .profile-section {
     position: absolute;
-    top: 15px;
+    top: -50px; /* بالاتر از کانتینر */
     right: 15px;
     display: flex;
     align-items: center;
@@ -65,7 +65,7 @@ body {
 }
 
 .nft-image {
-    width: 200px; /* بزرگ‌تر */
+    width: 200px;
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
@@ -121,18 +121,17 @@ h1 {
     width: 80%;
     padding: 15px 0;
     border-radius: 10px;
-    animation: pulse 2s infinite, fadeIn 2s ease-out;
+    background: linear-gradient(90deg, #a78bfa 0%, #8b5cf6 50%, #a78bfa 100%);
+    background-size: 200% 100%;
+    animation: wave 3s infinite, fadeIn 2s ease-out;
 }
 
-@keyframes pulse {
+@keyframes wave {
     0% {
-        box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 15px rgba(167, 139, 250, 0);
+        background-position: 0% 50%;
     }
     100% {
-        box-shadow: 0 0 0 0 rgba(167, 139, 250, 0);
+        background-position: 200% 50%;
     }
 }
 
@@ -183,7 +182,6 @@ h1 {
     }
 }
 
-/* انیمیشن‌های ورود */
 @keyframes slideIn {
     0% {
         transform: translateY(-50px);
