@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFT Mint Mini App</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js" type="text/javascript"></script>
 </head>
 <body>
+    <div class="stars-background"></div> <!-- برای بک‌گراند ستاره‌ها -->
     <div class="container">
         <div class="header">
-            <img src="logo-placeholder.png" alt="NFT Logo" class="logo">
+            <img src="https://example.com/nft-image.jpg" alt="NFT Image" class="nft-image">
             <h1>NFT Mint</h1>
-            <p>Mint your NFT on Farcaster</p>
+            <p class="nft-description">A unique piece of digital art, crafted with cosmic energy and rare stardust. Own a fragment of the universe!</p>
+            <p class="nft-availability">Available: 50 / 100</p>
         </div>
-        <div class="nft-link">
-            <a href="https://opensea.io/assets/base/0xe2ba182898141f19b4a7d739c715cd162d31766c/1/" target="_blank">
-                View NFT on OpenSea
-            </a>
-        </div>
-        <button class="mint-button" onclick="mintNFT()">Mint Now</button>
+        <button class="mint-button" onclick="connectWallet()">Connect Wallet</button>
+        <button class="mint-button mint-action" id="mintButton" onclick="mintNFT()" disabled>Mint Now</button>
+        <p id="status" style="color: #cccccc; margin-top: 10px;"></p>
     </div>
     <script src="script.js"></script>
 </body>
