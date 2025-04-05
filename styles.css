@@ -15,22 +15,24 @@ body {
 .container {
     text-align: center;
     background-color: #2a2a2a;
-    padding: 20px;
+    padding: 30px; /* کمی بزرگ‌تر */
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 90%;
-    max-width: 400px;
+    max-width: 450px; /* بزرگ‌تر */
     position: relative;
     z-index: 1;
+    animation: slideIn 1s ease-out;
 }
 
 .profile-section {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     display: flex;
     align-items: center;
     gap: 10px;
+    animation: fadeIn 1.2s ease-out;
 }
 
 .profile-circle {
@@ -38,7 +40,7 @@ body {
     height: 40px;
     background-color: #a78bfa;
     border-radius: 50%;
-    background-image: url('https://example.com/profile-image.jpg'); /* URL تصویر پروفایل */
+    background-image: url('https://example.com/profile-image.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -63,17 +65,19 @@ body {
 }
 
 .nft-image {
-    width: 150px;
-    height: 150px;
+    width: 200px; /* بزرگ‌تر */
+    height: 200px;
     object-fit: cover;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    animation: zoomIn 1s ease-out;
 }
 
 h1 {
-    font-size: 20px; /* کمی کوچیک‌تر */
+    font-size: 20px;
     margin: 10px 0;
     font-weight: 600;
+    animation: fadeIn 1.4s ease-out;
 }
 
 .nft-description {
@@ -82,12 +86,14 @@ h1 {
     font-style: italic;
     margin: 10px 0;
     line-height: 1.4;
+    animation: fadeIn 1.6s ease-out;
 }
 
 .nft-availability {
     font-size: 14px;
     color: #cccccc;
     margin: 10px 0;
+    animation: fadeIn 1.8s ease-out;
 }
 
 .mint-button {
@@ -115,11 +121,7 @@ h1 {
     width: 80%;
     padding: 15px 0;
     border-radius: 10px;
-    animation: pulse 2s infinite;
-}
-
-.mint-action:active {
-    animation: clickEffect 0.5s ease;
+    animation: pulse 2s infinite, fadeIn 2s ease-out;
 }
 
 @keyframes pulse {
@@ -178,5 +180,37 @@ h1 {
     100% {
         opacity: 0;
         transform: scale(0);
+    }
+}
+
+/* انیمیشن‌های ورود */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
