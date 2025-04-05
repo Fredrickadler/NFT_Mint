@@ -26,14 +26,13 @@ const contractABI = [
 let provider;
 let signer;
 let contract;
-const { MiniAppSDK } = window.FarcasterMiniApps || {};
-const sdk = new MiniAppSDK();
+const sdk = window.farcasterSDK;
 
 async function connectWallet() {
     const status = document.getElementById('status');
     try {
         let walletProvider = null;
-        if (sdk.wallet && sdk.wallet.ethProvider) {
+        if (sdk && sdk.wallet && sdk.wallet.ethProvider) {
             walletProvider = sdk.wallet.ethProvider;
             status.innerText = "Connecting via Farcaster wallet...";
         } else if (window.ethereum) {
@@ -135,10 +134,9 @@ setInterval(createStar, 500);
 window.onload = async function() {
     document.getElementById('status').innerText = "Loading Mini App...";
     try {
-        await Promise.race([
-            sdk.ready(),
-            new Promise(resolve => setTimeout(resolve, 5000))
-        ]);
+        if (sdk && sdk.actions && sdk.actions.ready) {
+            await sdk.actions.ready();
+        }
         document.getElementById('status').innerText = "Mini App loaded!";
     } catch (error) {
         document.getElementById('status').innerText = "Error loading app: " + error.message;
