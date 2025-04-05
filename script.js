@@ -26,7 +26,7 @@ const contractABI = [
 let provider;
 let signer;
 let contract;
-const { MiniAppSDK } = window.FarcasterMiniApps;
+const { MiniAppSDK } = window.FarcasterMiniApps || {};
 const sdk = new MiniAppSDK();
 
 async function connectWallet() {
@@ -34,15 +34,12 @@ async function connectWallet() {
     try {
         let walletProvider = null;
         if (sdk.wallet && sdk.wallet.ethProvider) {
-            // استفاده از EIP-1193 Provider از SDK
             walletProvider = sdk.wallet.ethProvider;
             status.innerText = "Connecting via Farcaster wallet...";
         } else if (window.ethereum) {
-            // MetaMask
             walletProvider = window.ethereum;
             status.innerText = "Connecting to MetaMask...";
         } else if (window.warplet) {
-            // Warplet (فرضی)
             walletProvider = window.warplet;
             status.innerText = "Connecting to Warplet...";
         } else {
@@ -92,14 +89,17 @@ async function mintNFT() {
     }
 }
 
-function handleWarpcastRequest() {
+async function handleWarpcastRequest() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('warpcast') || window.location.pathname === '/mint') {
         document.getElementById('status').innerText = "Request received from Warpcast!";
         if (signer && contract) {
-            mintNFT();
+            await mintNFT();
         } else {
-            connectWallet().then(() => mintNFT());
+            await connectWallet();
+            if (signer && contract) {
+                await mintNFT();
+            }
         }
     }
 }
@@ -133,6 +133,15 @@ function createStar() {
 setInterval(createStar, 500);
 
 window.onload = async function() {
-    handleWarpcastRequest();
-    await sdk.ready();
+    try {
+        // تلاش برای مخفی کردن Splash Screen با تایم‌اوت
+        await Promise.race([
+            sdk.ready(),
+            new Promise(resolve => setTimeout(resolve, 5000)) // 5 ثانیه تایم‌اوت
+        ]);
+        document.getElementById('status').innerText = "Mini App loaded!";
+    } catch (error) {
+        document.getElementById('status').innerText = "Error loading app: " + error.message;
+    }
+    await handleWarpcastRequest();
 };
