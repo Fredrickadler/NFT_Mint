@@ -1,0 +1,12 @@
+{
+    "name": "nft-mint-miniapp",
+    "version": "1.0.0",
+    "description": "A mini app for minting NFTs",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}
