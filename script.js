@@ -26,17 +26,12 @@ const contractABI = [
 let provider;
 let signer;
 let contract;
-const { MiniAppSDK } = window.FarcasterMiniApps || {};
-const sdk = new MiniAppSDK();
 
 async function connectWallet() {
     const status = document.getElementById('status');
     try {
         let walletProvider = null;
-        if (sdk.wallet && sdk.wallet.ethProvider) {
-            walletProvider = sdk.wallet.ethProvider;
-            status.innerText = "Connecting via Farcaster wallet...";
-        } else if (window.ethereum) {
+        if (window.ethereum) {
             walletProvider = window.ethereum;
             status.innerText = "Connecting to MetaMask...";
         } else if (window.warplet) {
@@ -132,19 +127,7 @@ function createStar() {
 
 setInterval(createStar, 500);
 
-window.onload = async function() {
-    document.getElementById('status').innerText = "Loading Mini App...";
-    try {
-        if (sdk && sdk.actions && sdk.actions.ready) {
-            // Splash Screen رو با sdk.actions.ready مخفی می‌کنیم
-            await sdk.actions.ready({ disableNativeGestures: true });
-            document.getElementById('status').innerText = "Mini App loaded with SDK!";
-        } else {
-            // اگه SDK نبود، فقط ادامه می‌دیم
-            document.getElementById('status').innerText = "Mini App loaded (No SDK detected)";
-        }
-    } catch (error) {
-        document.getElementById('status').innerText = "Error loading app: " + error.message;
-    }
-    await handleWarpcastRequest();
+window.onload = function() {
+    document.getElementById('status').innerText = "Mini App loaded!";
+    handleWarpcastRequest();
 };
