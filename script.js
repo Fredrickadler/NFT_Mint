@@ -24,23 +24,28 @@ const contractABI = [
     }
 ];
 
-// متغیرها برای ethers
+// متغیرها برای ethers و SDK
 let provider;
 let signer;
 let contract;
+const { MiniAppSDK } = window.FarcasterMiniApps; // SDK رو از window می‌گیرم
+const sdk = new MiniAppSDK();
 
-// تابع برای اتصال به والت (پشتیبانی از MetaMask و Warplet)
+// تابع برای اتصال به والت
 async function connectWallet() {
     const status = document.getElementById('status');
     try {
-        // چک کردن والت‌های موجود
         let walletProvider = null;
-        if (window.ethereum) {
-            // MetaMask یا هر والت سازگار با Ethereum
+        if (MiniAppSDK.ethProvider) {
+            // استفاده از ethProvider از SDK اگه توی Farcaster اجرا بشه
+            walletProvider = MiniAppSDK.ethProvider;
+            status.innerText = "Connecting via Farcaster wallet...";
+        } else if (window.ethereum) {
+            // MetaMask
             walletProvider = window.ethereum;
             status.innerText = "Connecting to MetaMask...";
         } else if (window.warplet) {
-            // Warplet (فرضاً اینجوری تشخیص داده می‌شه)
+            // Warplet (فرضی)
             walletProvider = window.warplet;
             status.innerText = "Connecting to Warplet...";
         } else {
@@ -56,11 +61,9 @@ async function connectWallet() {
         status.innerText = "Wallet connected!";
         document.getElementById('mintButton').disabled = false;
 
-        // آپدیت پروفایل (فرضی)
         const profileCircle = document.querySelector('.profile-circle');
-        profileCircle.style.backgroundImage = "url('https://i.imgur.com/example-profile.jpg')"; // تصویر واقعی بذار
+        profileCircle.style.backgroundImage = "url('https://i.imgur.com/example-profile.jpg')";
 
-        // آپدیت تعداد موجود
         const minted = await contract.minted();
         const totalSupply = await contract.totalSupply();
         document.getElementById('available').innerText = `${totalSupply.sub(minted).toString()} / ${totalSupply.toString()}`;
@@ -81,10 +84,9 @@ async function mintNFT() {
 
     try {
         status.innerText = "Minting your NFT...";
-        const tx = await contract.mint(await signer.getAddress(), { value: ethers.utils.parseEther("0.01") }); // فرضاً 0.01 ETH
+        const tx = await contract.mint(await signer.getAddress(), { value: ethers.utils.parseEther("0.01") });
         await tx.wait();
 
-        // آپدیت تعداد موجود
         const minted = await contract.minted();
         const totalSupply = await contract.totalSupply();
         availableSpan.innerText = `${totalSupply.sub(minted).toString()} / ${totalSupply.toString()}`;
@@ -107,7 +109,7 @@ function handleWarpcastRequest() {
     }
 }
 
-// تابع برای ایجاد ستاره‌ها توی بک‌گراند
+// تابع برای ایجاد ستاره‌ها
 function createStar() {
     const star = document.createElement('div');
     star.classList.add('star');
@@ -134,10 +136,11 @@ function createStar() {
     }, duration * 1000);
 }
 
-// هر 500 میلی‌ثانیه یه ستاره جدید
 setInterval(createStar, 500);
 
 // موقع لود صفحه
-window.onload = function() {
+window.onload = async function() {
     handleWarpcastRequest();
+    // مخفی کردن Splash Screen بعد از لود
+    await sdk.ready();
 };
