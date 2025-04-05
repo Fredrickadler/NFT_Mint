@@ -1,153 +1,11 @@
 body {
     margin: 0;
-    padding: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #1a1a1a; /* رنگ بک‌گراند تیره */
-    color: #ffffff; /* رنگ متن سفید */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* مطمئن می‌شیم که کل صفحه رو می‌گیره */
+    background: #1a1a2e; /* پس‌زمینه تیره برای هماهنگی با بنفش */
+    color: #ffffff;
+    text-align: center;
     position: relative;
     overflow: hidden;
-}
-
-.container {
-    text-align: center;
-    background-color: #2a2a2a; /* رنگ بک‌گراند کانتینر */
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 90%;
-    max-width: 450px;
-    position: relative;
-    z-index: 1;
-    animation: slideIn 1s ease-out;
-}
-
-.profile-section {
-    position: absolute;
-    top: -50px;
-    right: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    animation: fadeIn 1.2s ease-out;
-}
-
-.profile-circle {
-    width: 40px;
-    height: 40px;
-    background-color: #a78bfa;
-    border-radius: 50%;
-    background-image: url('https://example.com/profile-image.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.wallet-button {
-    background-color: #a78bfa;
-    color: #ffffff;
-    border: none;
-    padding: 8px 15px;
-    font-size: 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.wallet-button:hover {
-    background-color: #8b5cf6;
-}
-
-.header {
-    margin-bottom: 20px;
-}
-
-.nft-image {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    animation: zoomIn 1s ease-out;
-}
-
-h1 {
-    font-size: 20px;
-    margin: 10px 0;
-    font-weight: 600;
-    animation: fadeIn 1.4s ease-out;
-}
-
-.nft-description {
-    font-size: 14px;
-    color: #a78bfa;
-    font-style: italic;
-    margin: 10px 0;
-    line-height: 1.4;
-    animation: fadeIn 1.6s ease-out;
-}
-
-.nft-availability {
-    font-size: 14px;
-    color: #cccccc;
-    margin: 10px 0;
-    animation: fadeIn 1.8s ease-out;
-}
-
-.mint-button {
-    background-color: #a78bfa;
-    color: #ffffff;
-    border: none;
-    padding: 15px 30px;
-    font-size: 16px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 10px 0;
-}
-
-.mint-button:disabled {
-    background-color: #666;
-    cursor: not-allowed;
-}
-
-.mint-button:hover:not(:disabled) {
-    background-color: #8b5cf6;
-}
-
-.mint-action {
-    width: 80%;
-    padding: 15px 0;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #a78bfa 0%, #8b5cf6 50%, #a78bfa 100%);
-    background-size: 200% 100%;
-    animation: wave 3s infinite, fadeIn 2s ease-out;
-}
-
-@keyframes wave {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 200% 50%;
-    }
-}
-
-@keyframes clickEffect {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(167, 139, 250, 1);
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px 10px rgba(167, 139, 250, 0.5);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(167, 139, 250, 0);
-    }
 }
 
 .stars-background {
@@ -156,59 +14,94 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: transparent;
-    z-index: 0;
+    background: url('https://i.imgur.com/stars-bg.jpg') repeat; /* تصویر فرضی، می‌تونی عوض کنی */
+    opacity: 0.2;
+    z-index: -1;
 }
 
-.star {
-    position: absolute;
-    background: #ffffff;
+.container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.wallet-button {
+    padding: 8px 16px;
+    background: #8a63d2; /* بنفش فارکستر */
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.wallet-button:hover {
+    background: #a78bfa; /* روشن‌تر برای هاور */
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background: #8a63d2; /* بنفش فارکستر */
     border-radius: 50%;
-    animation: twinkle 3s infinite;
 }
 
-@keyframes twinkle {
-    0% {
-        opacity: 0;
-        transform: scale(0);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0);
-    }
+.nft-image {
+    max-width: 100%;
+    border-radius: 10px;
 }
 
-@keyframes slideIn {
-    0% {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+h1 {
+    font-size: 28px;
+    margin: 10px 0;
+    color: #ffffff;
 }
 
-@keyframes zoomIn {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+.nft-description {
+    font-family: 'Roboto Slab', serif; /* فونت نازک و جذاب */
+    font-weight: 300;
+    font-size: 14px; /* نازک‌تر */
+    color: #d3ccff; /* تناژ بنفش روشن برای متن */
+    margin: 10px 0;
 }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.nft-availability {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #cccccc;
+}
+
+.mint-button {
+    padding: 15px 40px; /* بزرگ‌تر کردن دکمه */
+    background: #8a63d2; /* بنفش فارکستر */
+    border: none;
+    color: #ffffff;
+    font-size: 18px; /* فونت کمی بزرگ‌تر */
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.mint-button:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+.mint-button:hover:not(:disabled) {
+    background: #a78bfa; /* روشن‌تر برای هاور */
+}
+
+#status {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #d3ccff; /* تناژ بنفش روشن */
 }
