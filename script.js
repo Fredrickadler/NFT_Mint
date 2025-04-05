@@ -93,13 +93,13 @@ async function handleWarpcastRequest() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('warpcast') || window.location.pathname === '/mint') {
         document.getElementById('status').innerText = "Request received from Warpcast!";
-        if (signer && contract) {
-            await mintNFT();
-        } else {
+        try {
             await connectWallet();
             if (signer && contract) {
                 await mintNFT();
             }
+        } catch (error) {
+            document.getElementById('status').innerText = "Error handling Warpcast request: " + error.message;
         }
     }
 }
@@ -133,13 +133,18 @@ function createStar() {
 setInterval(createStar, 500);
 
 window.onload = async function() {
+    document.getElementById('status').innerText = "Loading Mini App...";
     try {
-        // تلاش برای مخفی کردن Splash Screen با تایم‌اوت
-        await Promise.race([
-            sdk.ready(),
-            new Promise(resolve => setTimeout(resolve, 5000)) // 5 ثانیه تایم‌اوت
-        ]);
-        document.getElementById('status').innerText = "Mini App loaded!";
+        // فقط اگه SDK آماده باشه، Splash رو مخفی کن
+        if (sdk && sdk.ready) {
+            await Promise.race([
+                sdk.ready(),
+                new Promise(resolve => setTimeout(resolve, 5000)) // 5 ثانیه تایم‌اوت
+            ]);
+            document.getElementById('status').innerText = "Mini App loaded!";
+        } else {
+            document.getElementById('status').innerText = "Mini App loaded (No SDK detected)";
+        }
     } catch (error) {
         document.getElementById('status').innerText = "Error loading app: " + error.message;
     }
