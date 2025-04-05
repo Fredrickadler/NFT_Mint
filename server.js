@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+// برای پارس کردن بدنه درخواست‌های JSON
+app.use(express.json());
+
 // تنظیم CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -9,13 +12,15 @@ app.use((req, res, next) => {
     next();
 });
 
-// سرو کردن فایل‌های استاتیک (HTML، CSS، JS)
+// سرو کردن فایل‌های استاتیک
 app.use(express.static('.'));
 
-// هندل کردن درخواست‌های Warpcast برای مینت
+// هندل کردن درخواست‌های Warpcast
 app.post('/mint', (req, res) => {
     console.log('Mint request received from Warpcast:', req.body);
-    res.json({
+    // پاسخ ساده برای Warpcast
+    res.status(200).json({
+        type: "message",
         message: "NFT minted successfully!"
     });
 });
