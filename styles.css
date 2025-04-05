@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #1a1a1a;
     color: #ffffff;
     display: flex;
@@ -24,6 +24,40 @@ body {
     z-index: 1;
 }
 
+.profile-section {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #a78bfa;
+    border-radius: 50%;
+    background-image: url('https://example.com/profile-image.jpg'); /* URL تصویر پروفایل */
+    background-size: cover;
+    background-position: center;
+}
+
+.wallet-button {
+    background-color: #a78bfa;
+    color: #ffffff;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.wallet-button:hover {
+    background-color: #8b5cf6;
+}
+
 .header {
     margin-bottom: 20px;
 }
@@ -37,8 +71,9 @@ body {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 20px; /* کمی کوچیک‌تر */
     margin: 10px 0;
+    font-weight: 600;
 }
 
 .nft-description {
@@ -53,18 +88,6 @@ h1 {
     font-size: 14px;
     color: #cccccc;
     margin: 10px 0;
-}
-
-.creator-link {
-    display: inline-block;
-    color: #a78bfa;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 10px 0;
-}
-
-.creator-link:hover {
-    text-decoration: underline;
 }
 
 .mint-button {
