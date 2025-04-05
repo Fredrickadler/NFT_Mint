@@ -95,7 +95,7 @@ h1 {
 }
 
 .mint-button:disabled {
-    background: #6b4ba8; /* بنفش تیره‌تر برای حالت غیرفعال */
+    background: #6b4ba8; /* بنفش تیره‌تر که قبلاً گذاشتم */
     cursor: not-allowed;
 }
 
